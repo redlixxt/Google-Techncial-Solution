@@ -1,0 +1,54 @@
+Google Ads Enhanced Conversion
+
+1. gtag
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'AW-123456789', {
+        'allow_enhanced_conversion': true
+    });
+</script>
+<script>
+    window.addEventListener("load", function(event) {
+        document.querySelector("cssselectorexample").addEventListener("click", function() {
+            gtag("event", "conversion", {
+                sent_to: "AW-123456789/hashvalueexample"
+            });
+        });
+    });
+</script>
+
+
+2. input @ input
+* GTM - Custom javascipt
+    (Except script tag)
+** <input> 형태가 아니고 <div>, <p>, <span>, <td> 등과 같은 경우라면 .value가 아닌 .innerText를 사용한다.
+<script>
+    function() {
+        return document.querySelector("cssselectorexample1").value + "@" + document.querySelector("cssselectorexample2").value;
+    }
+</script>
+
+
+4. SessionStorage
+1) Custom HTML (Trigger : 결제 시작 버튼)
+<script>
+    window.sessionStorage.setItem("emailAddress", document.querySelector("emailselector1").value + "@" + document.querySelector("emailselector2").value);
+</script>
+
+2) user-provided Date varieble
+    (Except script tag)
+<script>
+    function() {
+        var email = window.sessionStorage.getItem('email');
+        return email;
+    }
+</script>
+
+3) Custom HTML
+* 고급 설정 - 태그 시퀀싱 - '맞춤 HTML - 이메일 삭제' 태그가 실행되기 전에 태그를 실행합니다. - 설정 태그 - (향상된 전환) - (향상된 전환) 태그 실행에 실패하거나 태그가 일시중지된 경우 맞춤 HTML - '이메일 삭제 태그'를 실행하지 마세요.
+<script>
+    window.sessionStorage.removeItem("email");
+</script>
